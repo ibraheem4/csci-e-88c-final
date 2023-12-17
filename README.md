@@ -89,9 +89,9 @@ This project includes a Kafka producer (`CsvKafkaProducer`) that reads data from
 The CSV file should have the following format:
 
 ```csv
-Date,Product,Quantity,Price
-2023-11-20 16:31:31,Beer,4,38.37
-2023-12-06 16:31:31,Vodka,4,37.82
+Order Date,Order ID,Invoice Number,Order Number,Order Type,Order Employee ID,Order Employee Name,Order Employee Custom ID,Note,Currency,Tax Amount,Tip,Service Charge,Discount,Order Total,Payments Total,Payment Note,Refunds Total,Manual Refunds Total,Tender,Credit Card Auth Code,Credit Card Transaction ID,Order Payment State
+16-Dec-2023 02:44 AM EST,MKP7NKSJDFKF8,,,Dine In,XJ2NZ4EZ9V5Z2,Sena,,,USD,3.56,8.39,,0.00,33.56,33.56,,0.00,0.00,Credit Card,05756C,335000737412,Paid
+16-Dec-2023 02:20 AM EST,SAZMZE0CH9FT0,,,Dine In,1YPCYR0YP57K4,Alex,,,USD,3.56,6.04,,0.00,33.56,33.56,,0.00,0.00,Credit Card,42893B,335000737378,Paid
 ...
 ```
 
@@ -108,13 +108,13 @@ Date,Product,Quantity,Price
 The Spark application will output a table similar to the following:
 
 ```
-+-----------+-------------+------------------+
-| Product   | TotalQuantity | AveragePrice   |
-+-----------+-------------+------------------+
-| Appetizer | 225          | 32.93           |
-| Gin       | 284          | 25.47           |
-| ...       | ...          | ...             |
-+-----------+-------------+------------------+
++-----------+-----------------+-----------------+
+|Tender     |TotalOrderTotal  |AverageOrderTotal|
++-----------+-----------------+-----------------+
+|Credit Card|4014.139999999999|43.63195652173912|
+|Cash       |1303.08          |18.61542857142857|
+|Debit Card |5572.700000000002|35.72243589743591|
++-----------+-----------------+-----------------+
 ```
 
 This table shows the total quantity sold and the average price for each product based on the data streamed from Kafka.

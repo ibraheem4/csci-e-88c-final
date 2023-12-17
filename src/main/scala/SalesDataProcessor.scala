@@ -16,36 +16,39 @@ object SalesDataProcessor extends App {
     .format("kafka")
     .option("kafka.bootstrap.servers", bootstrapServers)
     .option("subscribe", topic)
-    .option("startingOffsets", "earliest") // Read from the earliest offset
+    .option("startingOffsets", "earliest")
     .load()
 
   val salesData = df.selectExpr("CAST(value AS STRING)").as[String]
-    .map(_.split(","))
-    .map(array => (array(0), array(1), array(2).toInt, array(3).toDouble))
-    .toDF("Date", "Product", "Quantity", "Price")
+    .flatMap { line =>
+      try {
+        val fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1)
+        Some((fields(19), fields(14).toDouble))  // Adjusted indices for Tender and OrderTotal
+      } catch {
+        case _: ArrayIndexOutOfBoundsException => None
+      }
+    }
+    .toDF("Tender", "OrderTotal")
 
-  // Aggregate total quantity and average price per product
-  val statsByProduct = salesData.groupBy("Product")
+  val statsByTender = salesData.groupBy("Tender")
     .agg(
-      sum("Quantity").alias("TotalQuantity"),
-      avg("Price").alias("AveragePrice")
+      sum("OrderTotal").alias("TotalOrderTotal"),
+      avg("OrderTotal").alias("AverageOrderTotal")
     )
 
-  // Define a custom foreachBatch function to log the output of each micro-batch
   def logOutput(batchDF: org.apache.spark.sql.DataFrame, batchId: Long): Unit = {
     println(s"Batch ID: $batchId")
     if (batchDF.count() > 0) {
-      println("Statistics per Product:")
+      println("Order Type Statistics:")
       batchDF.show(false)
     } else {
       println("No new data in this batch.")
     }
   }
 
-  // Output the results using foreachBatch for more control
-  val query = statsByProduct.writeStream
+  val query = statsByTender.writeStream
     .outputMode("complete")
-    .trigger(Trigger.ProcessingTime("5 seconds")) // Adjust the trigger interval as needed
+    .trigger(Trigger.ProcessingTime("5 seconds"))
     .foreachBatch(logOutput _)
     .start()
 
