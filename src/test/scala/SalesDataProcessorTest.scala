@@ -42,8 +42,8 @@ class SalesDataProcessorTest extends AnyFunSuite with Matchers {
     val results = statsByTender.collect()
 
     results should contain theSameElementsAs Seq(
-      Row("Credit Card", 1L, 33.56, 33.56), // Total Orders, Total Order Total, Average Order Total
-      Row("Debit Card", 1L, 13.43, 13.43)   // Total Orders, Total Order Total, Average Order Total
+      Row("Credit Card", 1L, 33.56, 33.56),
+      Row("Debit Card", 1L, 13.43, 13.43)
     )
   }
 }

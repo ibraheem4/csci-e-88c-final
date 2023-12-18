@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33514b97-790b-40b3-bcf2-fe354a01d0f2" name="Changes" comment="feat: use (edited) real data">
-      <change afterPath="$PROJECT_DIR$/src/test/scala/SalesDataProcessorTest.scala" afterDir="false" />
+    <list default="true" id="33514b97-790b-40b3-bcf2-fe354a01d0f2" name="Changes" comment="test: add unit test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/CsvKafkaProducer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/CsvKafkaProducer.scala" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/SalesDataProcessor.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/SalesDataProcessor.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/scala/SalesDataProcessorTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/scala/SalesDataProcessorTest.scala" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +116,7 @@
       <updated>1702833235674</updated>
       <workItem from="1702833236674" duration="10184000" />
       <workItem from="1702847988947" duration="9585000" />
-      <workItem from="1702860101015" duration="1470000" />
+      <workItem from="1702860101015" duration="2190000" />
     </task>
     <task id="LOCAL-00001" summary="feat: download spark, kafka packages">
       <option name="closed" value="true" />
@@ -160,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702858455657</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test: add unit test">
+      <option name="closed" value="true" />
+      <created>1702862149783</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702862149783</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +177,7 @@
     <MESSAGE value="feat: setup SalesDataProcessor" />
     <MESSAGE value="feat: get data into table" />
     <MESSAGE value="feat: use (edited) real data" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: use (edited) real data" />
+    <MESSAGE value="test: add unit test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test: add unit test" />
   </component>
 </project>
