@@ -4,7 +4,7 @@ import scala.io.Source
 import org.apache.log4j.{Level, Logger}
 
 object CsvKafkaProducer extends App {
-  Logger.getLogger("org").setLevel(Level.INFO)
+  Logger.getLogger("org").setLevel(Level.WARN)
 
   val bootstrapServers = "localhost:9092"
   val topic = "clover_sales_data"
@@ -20,7 +20,6 @@ object CsvKafkaProducer extends App {
   for (line <- bufferedSource.getLines.drop(1)) {
     val record = new ProducerRecord[String, String](topic, line)
     producer.send(record)
-    println(s"Sent data to Kafka: $line")
   }
 
   bufferedSource.close()

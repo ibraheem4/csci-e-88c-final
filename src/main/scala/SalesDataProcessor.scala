@@ -4,7 +4,7 @@ import org.apache.spark.sql.streaming.Trigger
 import org.apache.log4j.{Level, Logger}
 
 object SalesDataProcessor extends App {
-  Logger.getLogger("org").setLevel(Level.INFO)
+  Logger.getLogger("org").setLevel(Level.WARN)
 
   val spark = SparkSession.builder.appName("SalesDataAnalysis").master("local[*]").getOrCreate()
   import spark.implicits._
@@ -23,7 +23,7 @@ object SalesDataProcessor extends App {
     .flatMap { line =>
       try {
         val fields = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1)
-        Some((fields(19), fields(14).toDouble))  // Adjusted indices for Tender and OrderTotal
+        Some((fields(19), fields(14).toDouble))
       } catch {
         case _: ArrayIndexOutOfBoundsException => None
       }
@@ -32,7 +32,7 @@ object SalesDataProcessor extends App {
 
   val statsByTender = salesData.groupBy("Tender")
     .agg(
-      count("OrderTotal").alias("TotalOrderTotal"),
+      count("OrderTotal").alias("TotalOrders"),
       avg("OrderTotal").alias("AverageOrderTotal")
     )
 
