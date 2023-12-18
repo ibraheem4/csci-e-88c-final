@@ -32,7 +32,7 @@ object SalesDataProcessor extends App {
 
   val statsByTender = salesData.groupBy("Tender")
     .agg(
-      sum("OrderTotal").alias("TotalOrderTotal"),
+      count("OrderTotal").alias("TotalOrderTotal"),
       avg("OrderTotal").alias("AverageOrderTotal")
     )
 

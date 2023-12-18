@@ -105,16 +105,16 @@ Order Date,Order ID,Invoice Number,Order Number,Order Type,Order Employee ID,Ord
 
 ### Example Output Table
 
-The Spark application will output a table similar to the following:
+The Spark application will perform simple data analysis and output a table similar to the following:
 
 ```
-+-----------+-----------------+-----------------+
-|Tender     |TotalOrderTotal  |AverageOrderTotal|
-+-----------+-----------------+-----------------+
-|Credit Card|4014.139999999999|43.63195652173912|
-|Cash       |1303.08          |18.61542857142857|
-|Debit Card |5572.700000000002|35.72243589743591|
-+-----------+-----------------+-----------------+
++-----------+---------------+-----------------+
+|Tender     |TotalOrderTotal|AverageOrderTotal|
++-----------+---------------+-----------------+
+|Credit Card|92             |43.63195652173912|
+|Cash       |70             |18.61542857142857|
+|Debit Card |156            |35.72243589743591|
++-----------+---------------+-----------------+
 ```
 
 This table shows the total quantity sold and the average price for each product based on the data streamed from Kafka.
